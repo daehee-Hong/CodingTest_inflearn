@@ -1,6 +1,7 @@
 package section1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,8 +37,17 @@ public class 단어뒤집기 {
     public static List<String> solution (int n, String[] str){
         List<String> answer = new ArrayList<>();
 
-        for (String s : str) {
-            answer.add(new StringBuilder(s).reverse().toString());
+        for (String x : str) {
+            char[] s = x.toCharArray();
+            int lt = 0, rt = s.length -1;
+            while (lt < rt){
+                char tmp = s[lt];
+                 s[lt] = s[rt];
+                 s[rt] = tmp;
+                 lt++;
+                 rt--;
+            }
+            answer.add(String.valueOf(s));
         }
         
         return answer;
