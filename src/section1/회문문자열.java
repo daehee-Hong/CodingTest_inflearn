@@ -1,5 +1,6 @@
 package section1;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class 회문문자열 {
@@ -29,15 +30,10 @@ public class 회문문자열 {
     }
 
     public static String solution (String str){
-        String answer = "YES";
-        str = str.toLowerCase();
-        for (int i = 0; i < str.length()/2; i++) {
-            if (str.charAt(i) != str.charAt(str.length() - (i + 1))) {
-                answer = "NO";
-                break;
-            }
-        }
+        String answer = "";
 
-        return answer;
+        String reverse = new StringBuilder(str.toLowerCase()).reverse().toString();
+
+        return str.toLowerCase(Locale.ROOT).equals(reverse) ? "YES" : "NO";
     }
 }
