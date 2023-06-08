@@ -25,21 +25,30 @@ public class 피보나치_수열 {
         int next1 = Integer.parseInt(scanner.nextLine());
         int[] arr = new int[next1];
 
-        List<Integer> result = solution(next1);
-        for (Integer s : result) {
-            System.out.print(s + " ");
-        }
-
+//        List<Integer> result = solution(next1);
+//        for (Integer s : result) {
+//            System.out.print(s + " ");
+//        }
+        solution(next1);
     }
 
-    public static List<Integer> solution (int n){
+    public static void solution (int n){
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(1);
+
+        int a = 1, b = 1, c;
+
+        System.out.print(a + " " + b + " ");
+
         for (int i = 2; i < n; i++) {
-            answer.add(answer.get(i - 2) + answer.get(i - 1));
+            c = a + b;
+            System.out.print(c + " ");
+            a = b;
+            b = c;
         }
 
-        return answer;
+//
+//        return answer;
     }
 }
