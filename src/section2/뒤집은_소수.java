@@ -39,15 +39,11 @@ public class 뒤집은_소수 {
         ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < arr.length; i++) {
-            int tmp = arr[i];
-            int res = 0;
-            while (tmp > 0){
-                int t = tmp % 10;
-                res = res * 10 + t;
-                tmp = tmp / 10;
-            }
-            if (isPrime(res)) list.add(res);
+            StringBuilder sb = new StringBuilder(String.valueOf(arr[i]));
+            int value = Integer.parseInt(sb.reverse().toString());
+            if (isPrime(value)) list.add(value);
         }
+
         return list;
     }
 
