@@ -42,25 +42,22 @@ public class 봉우리 {
 
     public static int solution (int[][] arr){
         int answer = 0;
-        int[][] arr2 = new int[arr.length + 2][arr.length + 2];
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, 1, 0, -1};
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length; j++) {
-                arr2[i + 1][j + 1] = arr[i][j];
-            }
-        }
+                boolean flag = true;
+                for (int k = 0; k < 4; k++){
+                    int nx = i+dx[k];
+                    int ny = j+dy[k];
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                int now = arr2[i + 1][j + 1];
-                if (now > 0){
-                    if (now > arr2[i][j + 1]
-                            && now > arr2[i + 1][j]
-                            && now > arr2[i + 1][j + 2]
-                            && now > arr2[i + 2][j + 1]) {
-                        answer++;
+                    if ( nx >=0 && nx<arr.length && ny >= 0 && ny < arr.length && arr[nx][ny] >= arr[i][j]) {
+                        flag = false;
+                        break;
                     }
                 }
+                if (flag) answer++;
             }
         }
 
