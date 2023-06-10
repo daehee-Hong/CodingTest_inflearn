@@ -1,9 +1,10 @@
-package section2;
+package section3;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
-public class 멘토링 {
+public class 두_배열_합치기 {
     /*
     설명
 
@@ -32,48 +33,38 @@ public class 멘토링 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int next1 = scanner.nextInt();
-        int next2 = scanner.nextInt();
-        int[][] arr = new int[next2][next1];
-        for (int i = 0; i < next2; i++) {
-            for (int j = 0; j < next1; j++) {
-                arr[i][j] = scanner.nextInt();
-            }
+
+        int[] arr = new int[next1];
+        for (int i = 0; i < next1; i++) {
+            arr[i] = scanner.nextInt();
         }
-        int arr2 = solution(arr);
-        System.out.print(arr2);
+
+        int next2 = scanner.nextInt();
+
+        int[] arr2 = new int[next2];
+        for (int i = 0; i < next2; i++) {
+            arr2[i] = scanner.nextInt();
+        }
+        int[] result = solution(arr, arr2);
+        for (int i : result) {
+            System.out.print(i + " ");
+        }
     }
 
-    public static int solution (int[][] arr){
+    public static int[] solution (int[] arr, int[] arr2){
         int answer = 0;
-        int m = arr.length;     // 테스트 수
-        int n = arr[0].length;  // 학생 수
-
-        // 처음 이중 for 문은 배열의 모든 값을 순회하기 위해서 사용
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                int cnt = 0;
-                // 내부의 이중 for 문은 m=테스트수, s=학생수로 돌려야한다.
-                for (int k = 0; k < m; k++) {
-                    int pi=0, pj=0;
-                    for (int s = 0; s < n; s++) {
-                        // i가 멘토, j가 멘티로 한다.
-                        if (arr[k][s] == i+1) pi=s;
-                        if (arr[k][s] == j+1) pj=s;
-                    }
-                    // (pi)멘토가 (pj)멘티보다 작아야 등수가 낮은 것이므로 카운트한다.
-                    if (pi<pj) cnt++;
-                }
-                // 멘토가 멘티보다 큰 카운트가
-                if (cnt==m){
-                    answer++;
-                }
-            }
+        int[] newList = new int[arr.length + arr2.length];
+        int index = 0;
+        for (int i : arr) {
+            newList[index] = i;
+            index++;
         }
-
-        for (int[] ints : arr) {
-            System.out.println(Arrays.toString(ints));
+        for (int i : arr2) {
+            newList[index] = i;
+            index++;
         }
+        Arrays.sort(newList);
 
-        return answer;
+        return newList;
     }
 }
