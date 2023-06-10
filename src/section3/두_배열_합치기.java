@@ -1,6 +1,8 @@
 package section3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -45,26 +47,42 @@ public class 두_배열_합치기 {
         for (int i = 0; i < next2; i++) {
             arr2[i] = scanner.nextInt();
         }
-        int[] result = solution(arr, arr2);
+        List<Integer> result = solution(arr, arr2);
         for (int i : result) {
             System.out.print(i + " ");
         }
     }
 
-    public static int[] solution (int[] arr, int[] arr2){
-        int answer = 0;
-        int[] newList = new int[arr.length + arr2.length];
-        int index = 0;
-        for (int i : arr) {
-            newList[index] = i;
-            index++;
-        }
-        for (int i : arr2) {
-            newList[index] = i;
-            index++;
-        }
-        Arrays.sort(newList);
+    public static List<Integer> solution (int[] arr, int[] arr2){
+        List<Integer> answer = new ArrayList<>();
+        int n = arr.length;
+        int m = arr2.length;
 
-        return newList;
+        int p1 = 0;
+        int p2 = 0;
+        // p1, p2 가 &&로 true 상태이다가 하나라도 배별을 넘어가면 flase
+        while (p1 < n && p2 < m){
+            if (arr[p1] > arr2[p2]){
+                answer.add(arr2[p2]);
+                p2++;
+            }else {
+                answer.add(arr[p1]);
+                p1++;
+            }
+        }
+        // p1이 n 보다 작으면 남은 값이 있으므로 남은값 저장
+        while (p1<n) {
+            answer.add(arr[p1]);
+            p1++;
+        }
+
+        // p2이 n 보다 작으면 남은 값이 있으므로 남은값 저장
+        while (p2<m) {
+            answer.add(arr2[p2]);
+            p2++;
+        }
+        System.out.println(answer);
+
+        return answer;
     }
 }
