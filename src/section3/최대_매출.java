@@ -45,16 +45,24 @@ public class 최대_매출 {
 
     public static int solution (int[] arr, int k){
         int answer = 0;
+        int sum = 0;
+        // 처음 k개의 연속된 값을 sum에 저장
+        for (int i = 0; i < k; i++){
+            sum += arr[i];
+        }
+        // answer에 sum값을 저장 (max값)
+        answer = sum;
 
-        for (int i = 0; i < arr.length - (k - 1); i++) {
-            int sum = 0;
-            for (int j = i; j < k + i; j++) {
-                sum += arr[j];
-            }
+        // i = k 로 이미 sum한 값 다음 부터 반복
+        for (int i = k; i < arr.length; i++) {
+            sum += arr[i];      // sum한 값 다음 값을 더하고
+            sum -= arr[i-k];    // sum한 값 첫번째 값을 뺀다.
 
+            // sum값이 최대값인지 확인한다.
             if (answer < sum){
                 answer = sum;
             }
+
         }
 
         return answer;
