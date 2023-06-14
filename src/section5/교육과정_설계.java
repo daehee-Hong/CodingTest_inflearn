@@ -59,29 +59,23 @@ public class 교육과정_설계 {
     }
 
     public static String solution (String n, String k){
-        String answer = "NO";
+        String answer = "YES";
         Queue<Character> queue = new LinkedList<>();
-        Queue<Character> queue2 = new LinkedList<>();
-        for (char c : k.toCharArray()) {
+
+        // 필수과목 문자열 queue에 저장
+        for (char c : n.toCharArray()) {
             queue.offer(c);
         }
-        for (char c : n.toCharArray()) {
-            queue2.offer(c);
-        }
-
-        while (queue.size() != n.length()){
-            if (queue.peek() != queue2.peek()){
-                queue.poll();
-            }else {
-                queue2.poll();
-                queue.add(queue.poll());
+        // 탐색할 문자열 반복
+        for (char c : k.toCharArray()) {
+            // 필수과목에 있는 문자열이면
+            if (queue.contains(c)){
+                // 다음 문자가 필수과목에 있는지 확인 없으면 순서가 다른거 이므로 NO 리턴
+               if (c!=queue.poll()) return "NO";
             }
         }
-        String test = "";
-        for (char c : queue) {
-            test += String.valueOf(c);
-        }
-        answer = test.equals(n) ? "YES" : "NO";
+
+        if (!queue.isEmpty()) return "NO";
 
         return answer;
     }
