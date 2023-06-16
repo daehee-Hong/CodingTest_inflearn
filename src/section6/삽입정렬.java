@@ -43,21 +43,17 @@ public class 삽입정렬 {
 
     public static int[] solution (int n, int[] arr){
         int[] answer = new int[n];
-        int tmp;
         int min = Integer.MAX_VALUE;
 
         for (int i = 1; i < arr.length; i++) {
-            tmp = arr[i];
+            int tmp = arr[i], j;
             // arr.length - i 비교횟수가 줄어야됨 마지막 요소에 가장큰값이 가서 비교할 필요없기 때문
-            for (int j = i-1; j >= 0; j--) {
-                // 이전 원소가 현재 원소보다 크면 교환
-                if (arr[j] > tmp){
-                    tmp = arr[j+1];
-                    arr[j+1] = arr[j];
-                    arr[j] = tmp;
-                }
+            for (j = i-1; j >= 0; j--) {
+                // 이전 원소가 현재 원소보다 크면 뒤로 이동
+                if (arr[j] > tmp) arr[j+1] = arr[j];
+                else break;
             }
-
+            arr[j + 1] = tmp;
         }
 
         return arr;
